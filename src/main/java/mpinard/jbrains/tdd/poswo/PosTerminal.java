@@ -13,8 +13,17 @@ public class PosTerminal {
     }
 
     public void onBarcode(final Barcode barcode) {
+        if (barcode == Barcode.EMPTY) {
+            display.emptyBarcodeRead();
+            return;
+        }
+        
         final Optional<Price> price = catalog.getPrice(barcode);
         
-        display.setPrice(barcode, price.get());
+        if (price.isPresent()) {
+            display.setPrice(barcode, price.get());
+        } else {
+            display.setProductNotFound(barcode);
+        }
     }
 }
