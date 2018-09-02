@@ -1,0 +1,36 @@
+buildscript {
+    ext {
+        slf4jVersion = "1.7.25"
+        logbackVersion = "1.2.3"
+        lombokVersion = "1.16.16"
+    }
+	repositories {
+		mavenCentral()
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'mpinard.jbrains.tdd'
+version = '0.1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    
+    compile("org.slf4j:slf4j-api:${slf4jVersion}")
+    compile("org.slf4j:jul-to-slf4j:${slf4jVersion}")
+    compile("org.apache.logging.log4j:log4j-to-slf4j:2.10.0")
+    compile("ch.qos.logback:logback-classic:${logbackVersion}")
+    compile("ch.qos.logback:logback-core:${logbackVersion}")
+
+    testCompile("org.projectlombok:lombok:${lombokVersion}")
+	testCompile("junit:junit:4.12")
+    testCompile("org.assertj:assertj-core:3.9.1")
+}
