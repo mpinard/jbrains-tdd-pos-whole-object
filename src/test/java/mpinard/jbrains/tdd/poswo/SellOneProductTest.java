@@ -7,22 +7,23 @@ import java.util.HashMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SellOneProductTest {
+    private static final Barcode BARCODE = new Barcode("12345");
 
     @Test
     public void productFoundForBarcode() {
-        final Barcode barcode = new Barcode();
         final Price price = new Price();
 
         final Catalog catalog = new Catalog(new HashMap<Barcode, Price>() {{
-            put(barcode, price);
+            put(BARCODE, price);
         }});
         
         final Display display = new Display();
         final PosTerminal pos = new PosTerminal(catalog, display);
 
-        pos.onBarcode(barcode);
+        pos.onBarcode(BARCODE);
         
-        assertThat(display.getText()).isEqualTo(String.format("The price is %s for barcode %s", price, barcode));
+        assertThat(display.getText()).isEqualTo(String.format("The price is %s for barcode %s", price, BARCODE));
+        assertThat(display.getText()).isEqualTo(String.format("The price is %s for barcode %s", price, "12345"));
     }
     
     @Test
@@ -30,11 +31,10 @@ public class SellOneProductTest {
         final Display display = new Display();
         final Catalog catalog = new Catalog(new HashMap<>());
         final PosTerminal pos = new PosTerminal(catalog, display);
-        final Barcode barcode = new Barcode();
         
-        pos.onBarcode(barcode);
+        pos.onBarcode(BARCODE);
         
-        assertThat(display.getText()).isEqualTo(String.format("Product not found for barcode %s", barcode));
+        assertThat(display.getText()).isEqualTo(String.format("Product not found for barcode %s", BARCODE));
     }
     
     @Test

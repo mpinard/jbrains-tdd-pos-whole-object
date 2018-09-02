@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DisplayTest {
+    private static final Barcode BARCODE = new Barcode("12345");
 
     @Test
     public void displayBeforeAnyBarcodeReceived() {
@@ -15,11 +16,10 @@ public class DisplayTest {
     @Test
     public void productNotFound() {
         final Display display = new Display();
-        final Barcode barcode = new Barcode();
         
-        display.setProductNotFound(barcode);
+        display.setProductNotFound(BARCODE);
 
-        assertThat(display.getText()).isEqualTo(String.format("Product not found for barcode %s", barcode));
+        assertThat(display.getText()).isEqualTo(String.format("Product not found for barcode %s", BARCODE));
     }
 
     @Test
