@@ -1,5 +1,7 @@
 package mpinard.jbrains.tdd.poswo;
 
+import java.util.Optional;
+
 public class PosTerminal {
     
     private Catalog catalog;
@@ -11,7 +13,8 @@ public class PosTerminal {
     }
 
     public void onBarcode(final Barcode barcode) {
-        final Price price = catalog.getPrice();
-        display.setPrice(barcode, price);
+        final Optional<Price> price = catalog.getPrice(barcode);
+        
+        display.setPrice(barcode, price.get());
     }
 }

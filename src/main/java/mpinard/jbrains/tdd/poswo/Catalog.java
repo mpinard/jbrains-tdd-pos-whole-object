@@ -1,5 +1,7 @@
 package mpinard.jbrains.tdd.poswo;
 
+import java.util.Optional;
+
 public class Catalog {
 
     private final Barcode barcode;
@@ -10,11 +12,20 @@ public class Catalog {
         this.price = price;
     }
 
+    public Catalog() {
+        this.barcode = new Barcode();
+        this.price = new Price();
+        
+    }
     public Barcode getBarcode() {
         return barcode;
     }
 
-    public Price getPrice() {
-        return price;
+    public Optional<Price> getPrice(final Barcode barcode) {
+        if (this.barcode == barcode) {
+            return Optional.of(price);
+        } else {
+            return Optional.empty();
+        }
     }
 }
