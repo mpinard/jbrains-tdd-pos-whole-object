@@ -1,4 +1,4 @@
 package mpinard.jbrains.tdd.poswo;
 
-public class Barcode {
+public final class Barcode {
 }
