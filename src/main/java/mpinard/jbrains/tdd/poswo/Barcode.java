@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public final class Barcode {
     public static final Barcode EMPTY = new Barcode("");
-    
+
     private final String value;
 
     public Barcode(final String value) {
@@ -13,12 +13,16 @@ public final class Barcode {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        
-        if (o == null || getClass() != o.getClass()) return false;
-        
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         final Barcode barcode = (Barcode) o;
-        
+
         return Objects.equals(value, barcode.value);
     }
 

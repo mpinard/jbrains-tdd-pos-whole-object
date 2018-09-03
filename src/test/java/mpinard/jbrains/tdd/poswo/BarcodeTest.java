@@ -42,11 +42,4 @@ public class BarcodeTest {
         assertThat(barcode1.hashCode()).isEqualTo(barcode2.hashCode());
     }
 
-    @Test
-    public void hashCodesDifferentForDifferentBarcodeValues() {
-        final Barcode barcode1 = new Barcode("12345");
-        final Barcode barcode2 = new Barcode("23456");
-
-        assertThat(barcode1.hashCode()).isNotEqualTo(barcode2.hashCode());
-    }
 }

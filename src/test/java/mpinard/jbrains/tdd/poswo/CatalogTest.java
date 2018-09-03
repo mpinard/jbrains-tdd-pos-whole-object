@@ -12,6 +12,8 @@ public class CatalogTest {
 
     private static final Barcode BARCODE1 = new Barcode("12345");
     private static final Barcode BARCODE2 = new Barcode("23456");
+    private static final Price PRICE1 = new Price("3.50");
+    private static final Price PRICE2 = new Price("29.99");
 
     @Test
     public void productNotFoundForEmptyCatalog() {
@@ -22,43 +24,36 @@ public class CatalogTest {
 
     @Test
     public void productFoundAfterAddedToCatalog() {
-        final Price price = new Price();
-
         final Catalog catalog = new Catalog(new HashMap<Barcode, Price>() {{
-            put(BARCODE1, price);
+            put(BARCODE1, PRICE1);
         }});
         
-        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(price));
+        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(PRICE1));
     }
     
     @Test
     public void catalogHasDifferentProductsWithDifferentPrices() {
-        final Price price1 = new Price();
-        final Price price2 = new Price();
-        
         final Catalog catalog = new Catalog(new HashMap<Barcode, Price>() {{
-            put(BARCODE1, price1);
-            put(BARCODE2, price2);
+            put(BARCODE1, PRICE1);
+            put(BARCODE2, PRICE2);
         }});
         
-        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(price1));
-        assertThat(catalog.getPrice(BARCODE2)).isEqualTo(Optional.of(price2));
+        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(PRICE1));
+        assertThat(catalog.getPrice(BARCODE2)).isEqualTo(Optional.of(PRICE2));
     }
 
     @Test
     public void changeMapAfterCatalogCreationDoesNotAffectCatalog() {
-        final Price price = new Price();
-
         final Map<Barcode, Price> barCodeToPrice = new HashMap<Barcode, Price>() {{
-            put(BARCODE1, price);
+            put(BARCODE1, PRICE1);
         }};
         
         final Catalog catalog = new Catalog(barCodeToPrice);
 
-        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(price));
+        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(PRICE1));
         
         barCodeToPrice.clear();
         
-        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(price));
+        assertThat(catalog.getPrice(BARCODE1)).isEqualTo(Optional.of(PRICE1));
     }
 }
